@@ -1,0 +1,50 @@
+DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <title>নগদ গিফট চেকার</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f9ff; text-align: center; padding: 50px;}
+    .container { background: white; padding: 30px; border-radius: 10px; max-width: 400px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);}
+    input[type="text"] { width: 80%; padding: 10px; margin: 15px 0; font-size: 16px;}
+    button { padding: 10px 20px; font-size: 16px; background: #0052cc; color: white; border: none; border-radius: 5px; cursor: pointer;}
+    .result { margin-top: 20px; font-size: 18px; color: green;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>নগদ গিফট চেকার</h2>
+    <p>আপনার মোবাইল নাম্বার লিখে গিফট স্ট্যাটাস দেখুন</p>
+    <input type="text" id="phone" placeholder="০১৭xxxxxxxx" />
+    <br />
+    <button onclick="checkGift()">চেক করুন</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function checkGift() {
+      const phone = document.getElementById('phone').value.trim();
+      const result = document.getElementById('result');
+      if(phone.length !== 11 || !phone.startsWith('01')) {
+        result.style.color = 'red';
+        result.textContent = 'দয়া করে সঠিক মোবাইল নাম্বার লিখুন।';
+        return;
+      }
+      result.style.color = 'black';
+      result.textContent = 'গিফট যাচাই করা হচ্ছে... দয়া করে অপেক্ষা করুন।';
+
+      setTimeout(() => {
+        const messages = [
+          `অভিনন্দন! ${phone} একাউন্টে ২৫,০০০ টাকা গিফট এসেছে! 🎉`,
+          `দুঃখিত! ${phone} একাউন্টে গিফট পাওয়া যায়নি। (মজা করলাম 😄)`,
+          `আপনি গিফটের জন্য নির্বাচিত হয়েছেন! 🎁 শীঘ্রই টাকা জমা হবে।`,
+          `গিফট চেক করতে ধৈর্য ধরুন... (মজা করলাম!)`
+        ];
+        const msg = messages[Math.floor(Math.random() * messages.length)];
+        result.style.color = 'green';
+        result.textContent = msg;
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
